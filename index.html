@@ -73,153 +73,147 @@
           </div>
         </div>
 
-        <div class="hero-visual reveal-scale" aria-label="Ilustración de un camión grúa transportando un vehículo" role="img">
+        <div class="hero-visual reveal-scale" aria-label="Ilustración animada de camión grúa en movimiento" role="img">
           <div class="visual-topline">
-            <span class="visual-kicker">ASISTENCIA EN RUTA</span>
+            <span class="visual-kicker">EN RUTA Y DISPONIBLE</span>
             <span class="visual-number" data-coverage>Tu ciudad y alrededores</span>
           </div>
           <div class="visual-glow"></div>
 
-          <svg class="tow-illustration" viewBox="0 0 640 400" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- LÍNEAS DE VIENTO SUPERIORES (FONDO) -->
+          <div class="wind-overlay" aria-hidden="true">
+            <span class="wind wind-1"></span>
+            <span class="wind wind-2"></span>
+            <span class="wind wind-3"></span>
+            <span class="wind wind-4"></span>
+          </div>
+
+          <svg class="tow-illustration" viewBox="0 0 640 400" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <defs>
-              <!-- Haz de luz del foco delantero -->
-              <linearGradient id="headlight-beam" x1="130" y1="270" x2="20" y2="290" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stop-color="#FDE047" stop-opacity="0.35"/>
+              <linearGradient id="headlight-beam" x1="120" y1="265" x2="10" y2="280" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#FDE047" stop-opacity="0.45"/>
                 <stop offset="100%" stop-color="#FDE047" stop-opacity="0"/>
               </linearGradient>
-              <!-- Reflejo de vidrios -->
               <linearGradient id="glass-glare" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#93C5FD" stop-opacity="0.8"/>
+                <stop offset="0%" stop-color="#93C5FD" stop-opacity="0.85"/>
                 <stop offset="100%" stop-color="#1E293B" stop-opacity="0.9"/>
+              </linearGradient>
+              <linearGradient id="wind-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0"/>
+                <stop offset="50%" stop-color="#FFFFFF" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
               </linearGradient>
             </defs>
 
-            <!-- Resplandor nocturno / Luna de fondo -->
-            <circle class="sun-pulse" cx="490" cy="110" r="50" fill="#F59E0B" opacity="0.85"/>
+            <!-- Luna / foco nocturno de fondo -->
+            <circle class="sun-pulse" cx="490" cy="105" r="48" fill="#F59E0B" opacity="0.85"/>
 
-            <!-- Pista / Asfalto y demarcación vial -->
-            <rect x="20" y="342" width="600" height="8" rx="4" fill="#334155" opacity="0.9"/>
-            <line x1="30" y1="368" x2="610" y2="368" stroke="#F59E0B" stroke-width="4" stroke-dasharray="24 18" opacity="0.7"/>
-
-            <!-- Haz de luz delantero proyectado hacia la izquierda -->
-            <polygon points="120,265 10,210 10,345 120,290" fill="url(#headlight-beam)"/>
-
-            <!-- ==============================================
-                 1. AUTO EN TRANSPORTE (SOBRE LA PLATAFORMA)
-                 ============================================== -->
-            <g id="transported-car">
-              <!-- Sombra del auto en la plataforma -->
-              <ellipse cx="420" cy="254" rx="105" ry="5" fill="#0F172A" opacity="0.6"/>
-
-              <!-- Carrocería sedán blanco/plata -->
-              <path d="M 315 250 L 325 228 C 328 222 334 218 342 218 L 368 218 L 398 178 C 403 172 411 168 420 168 L 476 168 C 485 168 493 173 498 181 L 518 218 L 536 222 C 542 223 546 228 546 234 L 546 250 Z" fill="#F1F5F9"/>
-
-              <!-- Ventanas del auto con tinte -->
-              <path d="M 374 214 L 402 176 L 442 176 L 442 214 Z" fill="url(#glass-glare)"/>
-              <path d="M 448 214 L 448 176 L 472 176 L 493 214 Z" fill="url(#glass-glare)"/>
-
-              <!-- Luces traseras y foco delantero del auto -->
-              <rect x="315" y="228" width="6" height="10" rx="2" fill="#FEF08A"/>
-              <rect x="541" y="228" width="5" height="12" rx="2" fill="#EF4444"/>
-
-              <!-- Ruedas del auto -->
-              <circle cx="362" cy="250" r="17" fill="#0F172A"/>
-              <circle cx="362" cy="250" r="9" fill="#94A3B8"/>
-              <circle cx="362" cy="250" r="4" fill="#334155"/>
-
-              <circle cx="496" cy="250" r="17" fill="#0F172A"/>
-              <circle cx="496" cy="250" r="9" fill="#94A3B8"/>
-              <circle cx="496" cy="250" r="4" fill="#334155"/>
-
-              <!-- Cinchas amarillas de amarre de seguridad -->
-              <path d="M 342 254 L 362 233 L 382 254" stroke="#FACC15" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M 476 254 L 496 233 L 516 254" stroke="#FACC15" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Ráfagas de viento vectoriales que cruzan la cabina -->
+            <g class="wind-gusts" opacity="0.75">
+              <path class="gust gust-1" d="M 60 190 Q 150 185 240 188 T 420 180" stroke="url(#wind-gradient)" stroke-width="2.5" stroke-linecap="round"/>
+              <path class="gust gust-2" d="M 110 135 Q 220 130 330 138 T 580 130" stroke="url(#wind-gradient)" stroke-width="3" stroke-linecap="round"/>
+              <path class="gust gust-3" d="M 80 230 Q 180 225 280 228 T 460 220" stroke="url(#wind-gradient)" stroke-width="2" stroke-linecap="round"/>
             </g>
 
-            <!-- ==============================================
-                 2. CAMIÓN GRÚA (CHASIS Y PLATAFORMA HIDRÁULICA)
-                 ============================================== -->
-            <!-- Pistones y soporte hidráulico bajo la plancha -->
-            <line x1="330" y1="295" x2="380" y2="258" stroke="#94A3B8" stroke-width="7" stroke-linecap="round"/>
-            <line x1="380" y1="295" x2="420" y2="260" stroke="#64748B" stroke-width="6" stroke-linecap="round"/>
-            <rect x="300" y="286" width="60" height="24" rx="4" fill="#1E293B"/> <!-- Tanque / Caja de herramientas -->
+            <!-- Pista y asfalto -->
+            <rect x="10" y="342" width="620" height="8" rx="4" fill="#334155" opacity="0.9"/>
+            <!-- Línea de demarcación vial con animación de velocidad hacia adelante -->
+            <line class="animated-road" x1="10" y1="368" x2="630" y2="368" stroke="#F59E0B" stroke-width="4" stroke-dasharray="26 22"/>
 
-            <!-- Plancha de rescate diamantada (cama plana de acero) -->
-            <path d="M 270 256 L 565 256 L 560 268 L 268 268 Z" fill="#E2E8F0"/>
-            <rect x="268" y="254" width="297" height="4" fill="#CBD5E1"/>
-
-            <!-- Rejilla de protección tras la cabina (Headache Rack) -->
-            <path d="M 268 180 L 268 256 M 274 180 L 274 256 M 264 186 L 278 186 M 264 212 L 278 212" stroke="#475569" stroke-width="3" stroke-linecap="round"/>
-            <!-- Cabrestante / Winche de tiro con gancho -->
-            <rect x="276" y="242" width="20" height="14" rx="3" fill="#0F172A"/>
-            <line x1="296" y1="249" x2="318" y2="249" stroke="#94A3B8" stroke-width="3"/>
-
-            <!-- Chasis estructural principal -->
-            <rect x="140" y="292" width="415" height="16" rx="3" fill="#0F172A"/>
+            <!-- Haz de luz delantero con tenue parpadeo -->
+            <polygon class="headlight-glow" points="120,260 0,200 0,350 120,295" fill="url(#headlight-beam)"/>
 
             <!-- ==============================================
-                 3. CABINA DEL CAMIÓN (DISEÑO ROBUSTO EN ÁMBAR)
+                 GRUPO PRINCIPAL CON SUSPENSIÓN / VIBRACIÓN DE RUTA
                  ============================================== -->
-            <!-- Cuerpo principal de la cabina -->
-            <path d="M 120 294 L 120 228 C 120 220 126 214 134 214 L 175 214 L 206 156 C 210 148 218 144 227 144 L 260 144 C 266 144 271 149 271 155 L 271 294 Z" fill="#F59E0B"/>
+            <g class="truck-body-vibe">
+              <!-- AUTO EN REMOLQUE -->
+              <g id="transported-car">
+                <ellipse cx="420" cy="254" rx="105" ry="5" fill="#0F172A" opacity="0.6"/>
+                <path d="M 315 250 L 325 228 C 328 222 334 218 342 218 L 368 218 L 398 178 C 403 172 411 168 420 168 L 476 168 C 485 168 493 173 498 181 L 518 218 L 536 222 C 542 223 546 228 546 234 L 546 250 Z" fill="#F1F5F9"/>
+                <path d="M 374 214 L 402 176 L 442 176 L 442 214 Z" fill="url(#glass-glare)"/>
+                <path d="M 448 214 L 448 176 L 472 176 L 493 214 Z" fill="url(#glass-glare)"/>
+                <rect x="315" y="228" width="6" height="10" rx="2" fill="#FEF08A"/>
+                <rect x="541" y="228" width="5" height="12" rx="2" fill="#EF4444"/>
+                <circle cx="362" cy="250" r="17" fill="#0F172A"/>
+                <circle cx="362" cy="250" r="9" fill="#94A3B8"/>
+                <circle cx="362" cy="250" r="4" fill="#334155"/>
+                <circle cx="496" cy="250" r="17" fill="#0F172A"/>
+                <circle cx="496" cy="250" r="9" fill="#94A3B8"/>
+                <circle cx="496" cy="250" r="4" fill="#334155"/>
+                <path d="M 342 254 L 362 233 L 382 254" stroke="#FACC15" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M 476 254 L 496 233 L 516 254" stroke="#FACC15" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
 
-            <!-- Parachoques delantero reforzado -->
-            <rect x="108" y="270" width="22" height="26" rx="5" fill="#1E293B"/>
-            <rect x="104" y="280" width="8" height="12" rx="2" fill="#475569"/>
+              <!-- PLATAFORMA DE ACERO Y WINCHE -->
+              <line x1="330" y1="295" x2="380" y2="258" stroke="#94A3B8" stroke-width="7" stroke-linecap="round"/>
+              <line x1="380" y1="295" x2="420" y2="260" stroke="#64748B" stroke-width="6" stroke-linecap="round"/>
+              <rect x="300" y="286" width="60" height="24" rx="4" fill="#1E293B"/>
+              <path d="M 270 256 L 565 256 L 560 268 L 268 268 Z" fill="#E2E8F0"/>
+              <rect x="268" y="254" width="297" height="4" fill="#CBD5E1"/>
+              <path d="M 268 180 L 268 256 M 274 180 L 274 256 M 264 186 L 278 186 M 264 212 L 278 212" stroke="#475569" stroke-width="3" stroke-linecap="round"/>
+              <rect x="276" y="242" width="20" height="14" rx="3" fill="#0F172A"/>
+              <line x1="296" y1="249" x2="318" y2="249" stroke="#94A3B8" stroke-width="3"/>
+              <rect x="140" y="292" width="415" height="16" rx="3" fill="#0F172A"/>
 
-            <!-- Foco delantero del camión -->
-            <rect x="118" y="245" width="8" height="16" rx="3" fill="#FEF08A"/>
-            <!-- Rejilla de ventilación frontal -->
-            <line x1="126" y1="262" x2="152" y2="262" stroke="#D97706" stroke-width="3" stroke-linecap="round"/>
-            <line x1="126" y1="270" x2="152" y2="270" stroke="#D97706" stroke-width="3" stroke-linecap="round"/>
+              <!-- CABINA DEL CAMIÓN -->
+              <path d="M 120 294 L 120 228 C 120 220 126 214 134 214 L 175 214 L 206 156 C 210 148 218 144 227 144 L 260 144 C 266 144 271 149 271 155 L 271 294 Z" fill="#F59E0B"/>
+              <rect x="108" y="270" width="22" height="26" rx="5" fill="#1E293B"/>
+              <rect x="104" y="280" width="8" height="12" rx="2" fill="#475569"/>
+              <rect x="118" y="245" width="8" height="16" rx="3" fill="#FEF08A"/>
+              <line x1="126" y1="262" x2="152" y2="262" stroke="#D97706" stroke-width="3" stroke-linecap="round"/>
+              <line x1="126" y1="270" x2="152" y2="270" stroke="#D97706" stroke-width="3" stroke-linecap="round"/>
 
-            <!-- Ventana de la cabina y parabrisas -->
-            <path d="M 178 206 L 207 154 C 209 150 213 148 218 148 L 254 148 C 258 148 261 151 261 155 L 261 206 Z" fill="url(#glass-glare)"/>
-            <!-- Separador de marco de ventana / puerta -->
-            <line x1="216" y1="148" x2="216" y2="206" stroke="#D97706" stroke-width="3"/>
-            <line x1="216" y1="206" x2="216" y2="290" stroke="#D97706" stroke-width="2.5"/> <!-- Línea de puerta -->
-            <rect x="222" y="222" width="12" height="4" rx="2" fill="#0F172A"/> <!-- Manilla puerta -->
+              <!-- Ventana, marco y retrovisor -->
+              <path d="M 178 206 L 207 154 C 209 150 213 148 218 148 L 254 148 C 258 148 261 151 261 155 L 261 206 Z" fill="url(#glass-glare)"/>
+              <line x1="216" y1="148" x2="216" y2="206" stroke="#D97706" stroke-width="3"/>
+              <line x1="216" y1="206" x2="216" y2="290" stroke="#D97706" stroke-width="2.5"/>
+              <rect x="222" y="222" width="12" height="4" rx="2" fill="#0F172A"/>
+              <rect x="180" y="178" width="7" height="22" rx="3" fill="#1E293B"/>
+              <line x1="187" y1="184" x2="198" y2="188" stroke="#1E293B" stroke-width="2.5"/>
+              <line x1="187" y1="196" x2="198" y2="194" stroke="#1E293B" stroke-width="2.5"/>
 
-            <!-- Retrovisor lateral exterior -->
-            <rect x="180" y="178" width="7" height="22" rx="3" fill="#1E293B"/>
-            <line x1="187" y1="184" x2="198" y2="188" stroke="#1E293B" stroke-width="2.5"/>
-            <line x1="187" y1="196" x2="198" y2="194" stroke="#1E293B" stroke-width="2.5"/>
+              <!-- Baliza de rescate con destello -->
+              <rect x="228" y="138" width="22" height="6" rx="2" fill="#1E293B"/>
+              <path class="beacon-light" d="M 230 138 C 230 128 248 128 248 138 Z" fill="#FDE047"/>
 
-            <!-- Baliza de emergencia ámbar (titilando en el techo) -->
-            <rect x="228" y="138" width="22" height="6" rx="2" fill="#1E293B"/>
-            <path class="beacon-light" d="M 230 138 C 230 128 248 128 248 138 Z" fill="#FDE047"/>
+              <!-- Tapabarros -->
+              <path d="M 150 294 C 150 270 210 270 210 294" stroke="#D97706" stroke-width="5" fill="none"/>
+              <path d="M 405 294 C 405 270 540 270 540 294" stroke="#1E293B" stroke-width="6" fill="none"/>
 
-            <!-- Tapabarros de ruedas del camión -->
-            <path d="M 150 294 C 150 270 210 270 210 294" stroke="#D97706" stroke-width="5" fill="none"/>
-            <path d="M 405 294 C 405 270 540 270 540 294" stroke="#1E293B" stroke-width="6" fill="none"/>
+              <!-- RUEDAS EN GIRO/RODADO -->
+              <g class="wheel wheel-front">
+                <circle cx="180" cy="322" r="28" fill="#0F172A"/>
+                <circle cx="180" cy="322" r="16" fill="#CBD5E1"/>
+                <circle cx="180" cy="322" r="7" fill="#475569"/>
+                <line x1="180" y1="308" x2="180" y2="336" stroke="#334155" stroke-width="2.5"/>
+                <line x1="166" y1="322" x2="194" y2="322" stroke="#334155" stroke-width="2.5"/>
+              </g>
 
-            <!-- ==============================================
-                 4. RUEDAS PESADAS DEL CAMIÓN GRÚA
-                 ============================================== -->
-            <!-- Rueda delantera del camión -->
-            <circle cx="180" cy="322" r="28" fill="#0F172A"/>
-            <circle cx="180" cy="322" r="16" fill="#CBD5E1"/>
-            <circle cx="180" cy="322" r="7" fill="#475569"/>
-            <circle cx="180" cy="316" r="1.5" fill="#0F172A"/>
-            <circle cx="186" cy="322" r="1.5" fill="#0F172A"/>
-            <circle cx="180" cy="328" r="1.5" fill="#0F172A"/>
-            <circle cx="174" cy="322" r="1.5" fill="#0F172A"/>
+              <g class="wheel wheel-rear-1">
+                <circle cx="435" cy="322" r="28" fill="#0F172A"/>
+                <circle cx="435" cy="322" r="16" fill="#CBD5E1"/>
+                <circle cx="435" cy="322" r="7" fill="#475569"/>
+                <line x1="435" y1="308" x2="435" y2="336" stroke="#334155" stroke-width="2.5"/>
+                <line x1="421" y1="322" x2="449" y2="322" stroke="#334155" stroke-width="2.5"/>
+              </g>
 
-            <!-- Ruedas traseras dobles (eje tándem de carga) -->
-            <circle cx="435" cy="322" r="28" fill="#0F172A"/>
-            <circle cx="435" cy="322" r="16" fill="#CBD5E1"/>
-            <circle cx="435" cy="322" r="7" fill="#475569"/>
-
-            <circle cx="505" cy="322" r="28" fill="#0F172A"/>
-            <circle cx="505" cy="322" r="16" fill="#CBD5E1"/>
-            <circle cx="505" cy="322" r="7" fill="#475569"/>
+              <g class="wheel wheel-rear-2">
+                <circle cx="505" cy="322" r="28" fill="#0F172A"/>
+                <circle cx="505" cy="322" r="16" fill="#CBD5E1"/>
+                <circle cx="505" cy="322" r="7" fill="#475569"/>
+                <line x1="505" y1="308" x2="505" y2="336" stroke="#334155" stroke-width="2.5"/>
+                <line x1="491" y1="322" x2="519" y2="322" stroke="#334155" stroke-width="2.5"/>
+              </g>
+            </g>
           </svg>
 
+          <!-- ENLACE DIRECTO INFERIOR -->
           <a href="#solicitar" class="visual-caption">
             <span class="caption-icon">→</span>
             <span>
-              <strong>¿Necesitas un traslado ahora?</strong>
-              <small>Toca aquí para coordinar por WhatsApp.</small>
+              <strong>¿Necesitas remolque ahora?</strong>
+              <small>Toca aquí y coordinamos tu traslado.</small>
             </span>
           </a>
         </div>

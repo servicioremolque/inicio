@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
-  /* Paleta de alto contraste, limpia y profesional */
+  /* Paleta base de alto contraste */
   --navy-950: #090E1A;
   --navy-900: #0F172A;
   --navy-800: #1E293B;
@@ -49,7 +49,7 @@ body {
   color: var(--navy-900);
   background: var(--white);
   font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: 16px; /* Base 16px para lectura cómoda en todas las edades */
+  font-size: 16px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
@@ -85,7 +85,9 @@ svg {
   padding-block: 96px;
 }
 
-/* Accesibilidad: Enlace para saltar contenido */
+/* ========================================================
+   ACCESIBILIDAD Y FOCO
+   ======================================================== */
 .skip-link {
   position: absolute;
   top: -80px;
@@ -97,13 +99,19 @@ svg {
   border-radius: var(--radius-sm);
   font-weight: 700;
 }
+
 .skip-link:focus {
   top: 14px;
 }
 
-/* ==========================================
-   ANIMACIONES AL HACER SCROLL (REVEAL)
-   ========================================== */
+:focus-visible {
+  outline: 3px solid var(--amber-500);
+  outline-offset: 3px;
+}
+
+/* ========================================================
+   ANIMACIONES DE SCROLL (REVEAL)
+   ======================================================== */
 .reveal-up {
   opacity: 0;
   transform: translateY(28px);
@@ -114,7 +122,7 @@ svg {
 
 .reveal-scale {
   opacity: 0;
-  transform: scale(0.95) translateY(16px);
+  transform: scale(0.96) translateY(16px);
   transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
               transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
@@ -126,7 +134,9 @@ svg {
   transform: translateY(0) scale(1);
 }
 
-/* Micro-animaciones continuas */
+/* ========================================================
+   KEYFRAMES: VIENTO, ASFALTO, SUSPENSIÓN Y LUCES
+   ======================================================== */
 @keyframes pulseDot {
   0%, 100% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.45); }
   50% { box-shadow: 0 0 0 8px rgba(22, 163, 74, 0); }
@@ -134,16 +144,103 @@ svg {
 
 @keyframes beaconFlash {
   0%, 100% { opacity: 1; filter: drop-shadow(0 0 8px #F59E0B); }
-  50% { opacity: 0.45; filter: none; }
+  50% { opacity: 0.35; filter: none; }
+}
+
+@keyframes roadMotion {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -96; }
+}
+
+@keyframes truckSuspension {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+@keyframes spinWheel {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes gustWind {
+  0% {
+    stroke-dasharray: 60 400;
+    stroke-dashoffset: 200;
+    opacity: 0;
+  }
+  30% { opacity: 0.9; }
+  100% {
+    stroke-dasharray: 120 400;
+    stroke-dashoffset: -350;
+    opacity: 0;
+  }
+}
+
+@keyframes blowStreak {
+  0% {
+    transform: translateX(450px);
+    opacity: 0;
+  }
+  25% { opacity: 0.85; }
+  100% {
+    transform: translateX(-200px);
+    opacity: 0;
+  }
+}
+
+@keyframes headlightFlicker {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 0.75; }
+}
+
+/* Aplicación de animaciones */
+.status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--whatsapp-600);
+  animation: pulseDot 2s infinite;
 }
 
 .beacon-light {
-  animation: beaconFlash 1.8s infinite ease-in-out;
+  animation: beaconFlash 1.6s infinite ease-in-out;
 }
 
-/* ==========================================
-   HEADER & NAVEGACIÓN
-   ========================================== */
+.animated-road {
+  animation: roadMotion 0.85s linear infinite;
+}
+
+.truck-body-vibe {
+  animation: truckSuspension 0.4s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+.wheel-front {
+  transform-origin: 180px 322px;
+  animation: spinWheel 0.7s linear infinite;
+}
+
+.wheel-rear-1 {
+  transform-origin: 435px 322px;
+  animation: spinWheel 0.7s linear infinite;
+}
+
+.wheel-rear-2 {
+  transform-origin: 505px 322px;
+  animation: spinWheel 0.7s linear infinite;
+}
+
+.gust-1 { animation: gustWind 1.4s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+.gust-2 { animation: gustWind 1.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s infinite; }
+.gust-3 { animation: gustWind 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.7s infinite; }
+
+.headlight-glow {
+  animation: headlightFlicker 2.5s ease-in-out infinite;
+}
+
+/* ========================================================
+   HEADER & MENÚ
+   ======================================================== */
 .site-header {
   position: sticky;
   top: 0;
@@ -287,9 +384,9 @@ svg {
   transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
-/* ==========================================
+/* ========================================================
    HERO
-   ========================================== */
+   ======================================================== */
 .hero {
   position: relative;
   overflow: hidden;
@@ -327,16 +424,7 @@ svg {
   border: 1px solid #FCD34D;
   border-radius: 999px;
   color: #92400E;
-  font-size: 13px;
   letter-spacing: 0.03em;
-}
-
-.status-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--whatsapp-600);
-  animation: pulseDot 2s infinite;
 }
 
 h1, h2, h3, p {
@@ -373,7 +461,6 @@ h1 em {
   gap: 14px;
 }
 
-/* Botones amplios y fáciles de presionar para cualquier edad */
 .button {
   min-height: 56px;
   display: inline-flex;
@@ -471,37 +558,42 @@ h1 em {
   font-weight: 800;
 }
 
-/* Ilustración Hero */
+/* ========================================================
+   HERO VISUAL (ILUSTRACIÓN + VIENTO)
+   ======================================================== */
 .hero-visual {
   position: relative;
-  min-height: 430px;
-  overflow: hidden;
+  width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-end;
   border-radius: var(--radius-lg);
-  color: var(--white);
-  background: radial-gradient(circle at 75% 22%, rgba(245, 158, 11, 0.22), transparent 36%),
-              linear-gradient(145deg, var(--navy-800) 0%, var(--navy-900) 70%, var(--navy-950) 100%);
+  padding: 24px;
+  min-height: 440px;
+  overflow: hidden;
+  background: radial-gradient(circle at 75% 20%, rgba(245, 158, 11, 0.22), transparent 38%),
+              linear-gradient(150deg, #1E293B 0%, #0F172A 75%, #090E1A 100%);
   box-shadow: var(--shadow-lg);
 }
 
 .hero-visual::before {
   content: '';
   position: absolute;
-  inset: 18px;
+  inset: 16px;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 18px;
+  border-radius: 20px;
   pointer-events: none;
 }
 
 .visual-topline {
   position: absolute;
-  z-index: 2;
-  inset: 30px 32px auto;
+  top: 22px;
+  left: 26px;
+  right: 26px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 4;
   color: #CBD5E1;
   font-size: 12px;
   font-weight: 700;
@@ -522,29 +614,64 @@ h1 em {
   border-radius: 50%;
 }
 
-.tow-illustration {
+.visual-glow {
   position: absolute;
-  z-index: 1;
+  width: 380px;
+  height: 200px;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(245, 158, 11, 0.1);
+  filter: blur(50px);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.wind-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.wind {
+  position: absolute;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.85), transparent);
+  animation: blowStreak 1.6s linear infinite;
+}
+
+.wind-1 { top: 28%; width: 140px; animation-duration: 1.1s; animation-delay: 0.1s; }
+.wind-2 { top: 46%; width: 220px; animation-duration: 1.5s; animation-delay: 0.5s; }
+.wind-3 { top: 62%; width: 180px; animation-duration: 1.3s; animation-delay: 0.8s; }
+.wind-4 { top: 78%; width: 120px; animation-duration: 0.9s; animation-delay: 0.2s; }
+
+.tow-illustration {
   width: 100%;
-  max-width: 580px;
-  right: -2%;
-  bottom: 42px;
+  height: auto;
+  max-height: 330px;
+  display: block;
+  margin-top: 36px;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.35));
+  position: relative;
+  z-index: 3;
 }
 
 .visual-caption {
-  position: absolute;
-  z-index: 3;
-  left: 28px;
-  right: 28px;
-  bottom: 24px;
+  position: relative;
+  z-index: 4;
+  margin-top: 10px;
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 12px 16px;
-  background: rgba(15, 23, 42, 0.82);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 14px 18px;
   border-radius: 14px;
-  backdrop-filter: blur(8px);
+  background: rgba(15, 23, 42, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(10px);
   transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
@@ -579,9 +706,9 @@ h1 em {
   font-size: 13px;
 }
 
-/* ==========================================
+/* ========================================================
    FRANJA DE CONFIANZA
-   ========================================== */
+   ======================================================== */
 .trust-strip {
   background: var(--navy-900);
   color: var(--white);
@@ -636,9 +763,9 @@ h1 em {
   background: rgba(255, 255, 255, 0.16);
 }
 
-/* ==========================================
-   SECCIÓN SERVICIOS
-   ========================================== */
+/* ========================================================
+   SERVICIOS
+   ======================================================== */
 .section-heading {
   display: flex;
   justify-content: space-between;
@@ -797,9 +924,9 @@ h1 em {
   font-weight: 800;
 }
 
-/* ==========================================
+/* ========================================================
    CÓMO FUNCIONA
-   ========================================== */
+   ======================================================== */
 .process-section {
   background: var(--surface);
   border-block: 1px solid var(--slate-200);
@@ -859,9 +986,9 @@ h1 em {
   font-size: 16px;
 }
 
-/* ==========================================
-   FORMULARIO DE SOLICITUD (ACCESIBLE)
-   ========================================== */
+/* ========================================================
+   FORMULARIO DE SOLICITUD
+   ======================================================== */
 .request-section {
   background: var(--white);
 }
@@ -1075,7 +1202,6 @@ h1 em {
   stroke-width: 2.2;
 }
 
-/* Inputs de 16px para evitar auto-zoom en móviles y facilitar lectura */
 .form-field input,
 .form-field select,
 .form-field textarea {
@@ -1149,9 +1275,9 @@ h1 em {
   text-align: center;
 }
 
-/* ==========================================
+/* ========================================================
    PREGUNTAS FRECUENTES
-   ========================================== */
+   ======================================================== */
 .faq-section {
   background: var(--surface);
   border-top: 1px solid var(--slate-200);
@@ -1233,9 +1359,9 @@ h1 em {
   line-height: 1.7;
 }
 
-/* ==========================================
+/* ========================================================
    CIERRE CTA & FOOTER
-   ========================================== */
+   ======================================================== */
 .closing-cta {
   padding-block: 64px;
   background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);
@@ -1337,7 +1463,6 @@ h1 em {
   color: var(--amber-500);
 }
 
-/* Botón flotante de WhatsApp */
 .floating-whatsapp {
   position: fixed;
   z-index: 200;
@@ -1371,22 +1496,26 @@ h1 em {
   stroke-width: 2;
 }
 
-:focus-visible {
-  outline: 3px solid var(--amber-500);
-  outline-offset: 3px;
-}
-
-/* ==========================================
-   RESPONSIVE DESIGN (MÓVILES Y TABLETS)
-   ========================================== */
+/* ========================================================
+   RESPONSIVE DESIGN (TABLETS Y MÓVILES)
+   ======================================================== */
 @media (max-width: 980px) {
-  .section-pad { padding-block: 72px; }
-  .hero-grid, .process-grid, .request-grid, .faq-grid {
+  .section-pad {
+    padding-block: 72px;
+  }
+  .hero-grid,
+  .process-grid,
+  .request-grid,
+  .faq-grid {
     grid-template-columns: 1fr;
     gap: 40px;
   }
-  .request-copy { position: static; }
-  .service-grid { grid-template-columns: 1fr; }
+  .request-copy {
+    position: static;
+  }
+  .service-grid {
+    grid-template-columns: 1fr;
+  }
   .section-heading {
     flex-direction: column;
     align-items: flex-start;
@@ -1395,11 +1524,22 @@ h1 em {
 }
 
 @media (max-width: 760px) {
-  .header-inner { min-height: 74px; }
-  .menu-toggle { display: block; z-index: 102; }
-  .menu-toggle[aria-expanded="true"] span:first-child { transform: translateY(6.5px) rotate(45deg); }
-  .menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
-  .menu-toggle[aria-expanded="true"] span:last-child { transform: translateY(-6.5px) rotate(-45deg); }
+  .header-inner {
+    min-height: 74px;
+  }
+  .menu-toggle {
+    display: block;
+    z-index: 102;
+  }
+  .menu-toggle[aria-expanded="true"] span:first-child {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+  .menu-toggle[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-toggle[aria-expanded="true"] span:last-child {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
 
   .main-nav {
     position: fixed;
@@ -1445,24 +1585,88 @@ h1 em {
     padding-block: 28px;
   }
 
-  .trust-divider { display: none; }
-  .form-row { grid-template-columns: 1fr; gap: 0; }
-  .closing-inner { flex-direction: column; align-items: stretch; }
-  .button-dark { width: 100%; }
-  .footer-main { flex-direction: column; align-items: flex-start; }
-  .footer-bottom { flex-direction: column; align-items: flex-start; padding-bottom: 95px; }
+  .trust-divider {
+    display: none;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .closing-inner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .button-dark {
+    width: 100%;
+  }
+
+  .footer-main {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 95px;
+  }
+}
+
+/* Celulares pequeños y medianos (menos de 600px) */
+@media (max-width: 600px) {
+  .hero-visual {
+    min-height: auto;
+    padding: 18px 16px;
+    border-radius: 20px;
+  }
+
+  .visual-topline {
+    position: static;
+    margin-bottom: 6px;
+    font-size: 11px;
+  }
+
+  .tow-illustration {
+    max-height: 230px;
+    margin-top: 4px;
+    margin-bottom: 16px;
+    transform: scale(1.02);
+  }
+
+  .visual-caption {
+    width: 100%;
+    margin-top: 0;
+    padding: 12px 14px;
+    gap: 10px;
+  }
+
+  .caption-icon {
+    width: 34px;
+    height: 34px;
+    font-size: 17px;
+  }
+
+  .visual-caption strong {
+    font-size: 14px;
+  }
+
+  .visual-caption small {
+    font-size: 12px;
+  }
 }
 
 @media (max-width: 480px) {
   .hero-actions {
     flex-direction: column;
   }
+
   .hero-actions .button {
     width: 100%;
   }
-  .hero-visual {
-    min-height: 340px;
-  }
+
   .floating-whatsapp {
     right: 16px;
     left: 16px;
@@ -1471,6 +1675,7 @@ h1 em {
   }
 }
 
+/* Modo accesibilidad para reducción de movimiento */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     scroll-behavior: auto !important;

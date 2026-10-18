@@ -4,7 +4,7 @@
   Ejemplo de formato para Chile: 56912345678
 */
 const SITE_CONFIG = {
-  businessName: 'Grúa Asistencia',
+  businessName: 'Grúas Torres Díaz',
   whatsappNumber: '569XXXXXXXX', // REEMPLAZAR por el número real antes de publicar
   coverage: 'Tu ciudad y alrededores'
 };

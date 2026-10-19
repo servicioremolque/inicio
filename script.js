@@ -5,7 +5,7 @@
 */
 const SITE_CONFIG = {
   businessName: 'Grúas Torres Díaz',
-  whatsappNumber: '569XXXXXXXX', // REEMPLAZAR por el número real antes de publicar
+  whatsappNumber: '56979081670', // REEMPLAZAR por el número real antes de publicar
   coverage: 'Tu ciudad y alrededores'
 };
 
